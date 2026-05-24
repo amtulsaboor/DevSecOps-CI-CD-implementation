@@ -13,7 +13,6 @@ pipeline {
     tools {
 
         jdk 'JDK17'
-        sonarQubeScanner 'sonar-scanner'
     }
 
     stages {
@@ -49,6 +48,10 @@ pipeline {
         stage('SonarQube Analysis') {
 
             steps {
+                script {
+
+            def scannerHome = tool 'sonar-scanner'
+
 
                 withSonarQubeEnv('sonarqube') {
 
@@ -61,6 +64,7 @@ pipeline {
                     '''
                 }
             }
+        }
         }
 
         stage('Build Docker Image') {
