@@ -77,6 +77,7 @@ Launch Ubuntu EC2 instance:
 ```bash
 ssh -i your-key.pem ubuntu@<PUBLIC-IP>
 ```
+<img width="1710" height="1107" alt="Screenshot 2026-05-24 at 1 42 56 PM" src="https://github.com/user-attachments/assets/ceebd9b3-c7e7-4215-a857-63ea74083321" />
 
 ---
 
@@ -125,6 +126,7 @@ Get Jenkins password:
 ```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
+<img width="1710" height="1107" alt="Screenshot 2026-05-24 at 1 55 34 PM" src="https://github.com/user-attachments/assets/cbef77a5-bbaf-4f31-8b0b-36e32fe06160" />
 
 ---
 
@@ -170,6 +172,7 @@ Default Credentials:
 Username: admin
 Password: admin
 ```
+<img width="1710" height="1107" alt="Screenshot 2026-05-24 at 2 24 15 PM" src="https://github.com/user-attachments/assets/fee8c70c-9e3d-4b8d-83a5-47e74bc2235a" />
 
 ---
 
@@ -526,87 +529,6 @@ spec:
 
 ---
 
-# Jenkins Pipeline (Jenkinsfile)
-
-```groovy
-pipeline {
-    agent any
-
-    environment {
-        DOCKER_IMAGE = "amtulsaboor/django-app"
-    }
-
-    stages {
-
-        stage('Clone Code') {
-            steps {
-                git branch: 'main',
-                url: 'https://github.com/your-repo.git'
-            }
-        }
-
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh '''
-                    sonar-scanner \
-                    -Dsonar.projectKey=django-app \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=http://<SONAR-IP>:9000 \
-                    -Dsonar.login=$SONAR_TOKEN
-                    '''
-                }
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t $DOCKER_IMAGE:$BUILD_NUMBER .'
-            }
-        }
-
-        stage('Trivy Scan') {
-            steps {
-                sh 'trivy image $DOCKER_IMAGE:$BUILD_NUMBER'
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub',
-                    usernameVariable: 'DOCKER_USER',
-                    passwordVariable: 'DOCKER_PASS'
-                )]) {
-
-                    sh '''
-                    docker login -u $DOCKER_USER -p $DOCKER_PASS
-                    docker push $DOCKER_IMAGE:$BUILD_NUMBER
-                    '''
-                }
-            }
-        }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                sh 'kubectl apply -f deployment.yaml'
-                sh 'kubectl apply -f service.yaml'
-            }
-        }
-    }
-
-    post {
-        success {
-            slackSend(
-                channel: '#devops',
-                message: "Deployment Successful"
-            )
-        }
-    }
-}
-```
-
----
 
 # Configure ArgoCD Application
 
@@ -643,22 +565,7 @@ kubectl get svc
 ```bash
 kubectl get deployments
 ```
-
----
-
-# Slack Notification Integration
-
-In Jenkins:
-
-```text
-Manage Jenkins → Configure System → Slack
-```
-
-Add:
-
-* Workspace Name
-* Channel Name
-* Token Credential
+<img width="1710" height="1107" alt="Screenshot 2026-05-24 at 5 13 41 PM" src="https://github.com/user-attachments/assets/a3fa21dc-caa1-408b-a2ae-3e28ffb43886" />
 
 ---
 
