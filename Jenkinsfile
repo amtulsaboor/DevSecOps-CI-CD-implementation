@@ -48,15 +48,25 @@ pipeline {
 
             steps {
 
-                withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_TOKEN')]) {
+                script {
 
-                    sh """
-                ${scannerHome}/bin/sonar-scanner \
-                -Dsonar.projectKey=django-devsecops \
-                -Dsonar.sources=. \
+                    def scannerHome = tool 'sonar-scanner'
+
+                    withCredentials([
+                        string(
+                            credentialsId: 'sonar token',
+                            variable: 'SONAR_TOKEN'
+                        )
+                    ]) {
+
+                        sh """
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=django-devsecops \
+                        -Dsonar.sources=. \
                         -Dsonar.host.url=${SONAR_URL} \
-                        -Dsonar.token=${SONAR_TOKEN}
-                    '''
+                        -Dsonar.login=${SONAR_TOKEN}
+                        """
+                    }
                 }
             }
         }
@@ -117,8 +127,8 @@ pipeline {
             steps {
 
                 sh '''
-                kubectl apply -f k8s/deployment.yaml
-                kubectl apply -f k8s/service.yaml
+                kubectl apply -f deployment.yaml
+                kubectl apply -f service.yaml
                 '''
             }
         }
