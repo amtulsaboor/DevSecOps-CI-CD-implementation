@@ -56,7 +56,7 @@ pipeline {
                     -Dsonar.projectKey=django-devsecops \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=http://54.196.36.40:9000 \
-                    -Dsonar.login=$sonar token
+                    -Dsonar.login=$SONAR_TOKEN
                     '''
                 }
             }
