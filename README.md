@@ -396,6 +396,7 @@ Events:
 ```text
 Just the push event
 ```
+<img width="1710" height="1107" alt="Screenshot 2026-05-24 at 2 51 14 PM" src="https://github.com/user-attachments/assets/0179bc1f-5462-4ad4-9749-e7326aa3d786" />
 
 ---
 
@@ -412,6 +413,7 @@ Install these plugins:
 * Blue Ocean
 * Docker
 * Credentials Binding
+<img width="1710" height="1107" alt="Screenshot 2026-05-24 at 2 46 44 PM" src="https://github.com/user-attachments/assets/6ad03e82-7b0e-4bb0-8742-572e40b96523" />
 
 ---
 
@@ -452,6 +454,9 @@ Add these credentials:
 | Sonar Token                 | Secret Text       |
 | Slack Token                 | Secret Text       |
 | AWS Credentials             | AWS Credentials   |
+<img width="1710" height="1107" alt="Screenshot 2026-05-24 at 3 08 29 PM" src="https://github.com/user-attachments/assets/fb13f142-e02d-49f2-87fa-10397a1b71e7" />
+<img width="1710" height="1107" alt="Screenshot 2026-05-24 at 2 50 31 PM" src="https://github.com/user-attachments/assets/1f486444-0a0c-4dfa-bdb3-6f5d6db1a1f1" />
+<img width="1710" height="1107" alt="Screenshot 2026-05-24 at 2 49 28 PM" src="https://github.com/user-attachments/assets/fb0341f2-28f4-4383-8ce4-b17d9982347d" />
 
 ---
 
@@ -565,6 +570,8 @@ kubectl get svc
 ```bash
 kubectl get deployments
 ```
+<img width="1710" height="1107" alt="Screenshot 2026-05-24 at 4 30 15 PM" src="https://github.com/user-attachments/assets/078aa153-8c25-41ba-8804-d708015b5643" />
+
 <img width="1710" height="1107" alt="Screenshot 2026-05-24 at 5 13 41 PM" src="https://github.com/user-attachments/assets/a3fa21dc-caa1-408b-a2ae-3e28ffb43886" />
 
 ---
