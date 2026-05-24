@@ -84,7 +84,7 @@ ssh -i your-key.pem ubuntu@<PUBLIC-IP>
 
 ```bash
 sudo apt update -y
-sudo apt install openjdk-17-jdk -y
+sudo apt install openjdk-21-jdk -y
 java -version
 ```
 
@@ -176,23 +176,18 @@ Password: admin
 # Install Trivy
 
 ```bash
-sudo apt install wget apt-transport-https gnupg lsb-release -y
-```
+# 1. Install prerequisites
+sudo apt-get update && sudo apt-get install -y wget gnupg lsb-release
 
-```bash
-wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | \
-sudo apt-key add -
-```
+# 2. Download and store the key in the secure keyring directory
+wget -qO- https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
 
-```bash
-echo deb https://aquasecurity.github.io/trivy-repo/deb \
-$(lsb_release -sc) main | sudo tee -a \
-/etc/apt/sources.list.d/trivy.list
-```
+# 3. Add the repository linked directly to that specific key
+echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/trivy.list
 
-```bash
-sudo apt update -y
-sudo apt install trivy -y
+# 4. Update your package lists and install Trivy
+sudo apt-get update && sudo apt-get install -y trivy
+
 ```
 
 Verify:
