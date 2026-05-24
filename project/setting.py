@@ -1,0 +1,2 @@
+'main',
+INSTALLED_APPS = [

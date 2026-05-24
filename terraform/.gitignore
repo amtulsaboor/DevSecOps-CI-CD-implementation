@@ -1,0 +1,95 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# SonarQube
+.sonar/
+.sonarqube/
+
+# Env secrets
+.env
+*.env
+config.properties
+
+# This is a comment
+
+# Ignore a specific file
+config.env
+
+# Ignore all files with .log extension
+*.log
+
+# Ignore a folder and everything inside it
+node_modules/
+target/
+build/
+
+# Ignore all files in any directory named temp
+temp/
+
+# Exception: don't ignore this file even if it matches above
+!important.log
+
+# Ignore files but not folders with same name
+*.zip
+!important.zip
+
+# Ignore all .txt files in root only
+/*.txt
+
+# Ignore all .txt files in any subdirectory
+**/*.txt
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.tfstate.lock.info
+.terraform.lock.hcl
+*.tfplan
+*.tfvars
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Local .terraform directories (generated)
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Exclude all .tfvars files, which are likely to contain sensitive data
+*.tfvars
+
+# Ignore .terraform directory (state, providers, etc)
+.terraform/
+
