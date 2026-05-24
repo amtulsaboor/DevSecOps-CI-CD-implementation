@@ -22,7 +22,7 @@ spec:
       containers:
 
       - name: django-container
-        image: amtulsaboor/django-devsecops:latest
+        image: amtulsaboor/django-devsecops:16
 
         ports:
         - containerPort: 8000
