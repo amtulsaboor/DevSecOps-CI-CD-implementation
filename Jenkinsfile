@@ -6,8 +6,7 @@ pipeline {
 
         IMAGE_NAME = "amtulsaboor/django-devsecops"
         IMAGE_TAG = "${BUILD_NUMBER}"
-
-        SONAR_TOKEN = credentials('sonar token')
+        SONAR_URL = 'http://54.196.36.40:9000'
     }
 
     tools {
@@ -45,26 +44,21 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        stage('Static Code Analysis') {
 
             steps {
-                script {
 
-            def scannerHome = tool 'sonar-scanner'
+                withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_TOKEN')]) {
 
-
-                withSonarQubeEnv('sonarqube') {
-
-                    sh '''
-                    sonar-scanner \
-                    -Dsonar.projectKey=django-devsecops \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=http://54.196.36.40:9000 \
-                    -Dsonar.login=$SONAR_TOKEN
+                    sh """
+                ${scannerHome}/bin/sonar-scanner \
+                -Dsonar.projectKey=django-devsecops \
+                -Dsonar.sources=. \
+                        -Dsonar.host.url=${SONAR_URL} \
+                        -Dsonar.token=${SONAR_TOKEN}
                     '''
                 }
             }
-        }
         }
 
         stage('Build Docker Image') {
