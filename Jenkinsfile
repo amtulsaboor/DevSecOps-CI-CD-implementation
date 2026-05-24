@@ -13,6 +13,7 @@ pipeline {
     tools {
 
         jdk 'JDK17'
+        sonarQubeScanner 'sonar-scanner'
     }
 
     stages {
