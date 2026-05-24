@@ -22,7 +22,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                url: 'https://github.com/your-username/your-repo.git'
+                url: 'https://github.com/amtulsaboor/DevSecOps-CI-CD-implementation.git'
             }
         }
 
@@ -83,22 +83,6 @@ pipeline {
         }
     }
 
-    post {
-
-        success {
-
-            slackSend(
-                channel: '#devops',
-                message: "SUCCESS: Application Deployed Successfully"
-            )
-        }
-
-        failure {
-
-            slackSend(
-                channel: '#devops',
-                message: "FAILED: Pipeline Failed"
-            )
         }
     }
 }
