@@ -7,7 +7,7 @@ pipeline {
         IMAGE_NAME = "amtulsaboor/django-devsecops"
         IMAGE_TAG = "${BUILD_NUMBER}"
 
-        SONAR_TOKEN = credentials('SONAR_TOKEN')
+        SONAR_TOKEN = credentials('sonar token')
     }
 
     tools {
@@ -56,7 +56,7 @@ pipeline {
                     -Dsonar.projectKey=django-devsecops \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=http://54.196.36.40:9000 \
-                    -Dsonar.login=$SONAR_TOKEN
+                    -Dsonar.login=$sonar token
                     '''
                 }
             }
